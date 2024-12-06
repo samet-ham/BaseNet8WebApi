@@ -1,0 +1,6 @@
+@BaseNet8WebApi_HostAddress = http://localhost:5096
+
+GET {{BaseNet8WebApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
