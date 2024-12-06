@@ -1,9 +1,8 @@
 ﻿using Business.Abstract;
+using Business.ValidationRules.FluentValidation;
 using Core.Entities.Concrete;
 using Core.Entities.Dtos;
-using Core.Utilities.Jwt;
 using Core.Utilities.Results;
-using Microsoft.AspNetCore.Mvc.Formatters;
 
 namespace Business.Concrete
 {
