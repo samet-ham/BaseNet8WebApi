@@ -8,12 +8,15 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Reflection;
 using System.Text;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+
 //Customer
 builder.Services.AddSingleton<ICustomerService, CustomerManager>();
 builder.Services.AddSingleton<ICustomerDal, EfCustomerDal>();
@@ -39,6 +42,9 @@ builder.Services.AddSingleton<IOperationClaimDal, EfOperationClaimDal>();
 builder.Services.AddSingleton<IUserOperationClaimService, UserOperationClaimManager>();
 builder.Services.AddSingleton<IUserOperationClaimDal, EfUserOperationClaimDal>();
 
+//FluentVAlidatoin
+builder.Services.AddFluentValidationAutoValidation();
+builder.Services.AddValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
 
 //Jwt setting
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
