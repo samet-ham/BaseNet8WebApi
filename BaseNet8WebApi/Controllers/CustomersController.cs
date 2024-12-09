@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Entities.Dtos;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,6 +8,7 @@ namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "Admin,User")]
     public class CustomersController : ControllerBase
     {
         private readonly ICustomerService _customerService;
@@ -17,6 +19,7 @@ namespace WebApi.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> Search([FromQuery] SearchCustomerDto searchCustomerDto)
         {
             var result = await _customerService.SearchAsync(searchCustomerDto);
