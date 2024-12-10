@@ -10,6 +10,8 @@ using System.Reflection;
 using System.Text;
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using Core.Entities.Concrete;
+using Core.Utilities.SendMail;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,7 +26,9 @@ builder.Services.AddSingleton<ICustomerDal, EfCustomerDal>();
 
 
 
-
+//Send Mail
+builder.Services.AddSingleton<ISendMailHelper, SendMailHelper>();
+builder.Services.Configure<SmtpSettings>(builder.Configuration.GetSection("SmtpSettings"));
 //User
 builder.Services.AddSingleton<IUserService, UserManager>();
 builder.Services.AddSingleton<IUserDal, EfUserDal>();
